@@ -45,7 +45,10 @@ export const MapProvider = ({ children }: Props) => {
          newMarkers.push(newMarker);
       }
       dispatch({ type: 'setMarkers', payload: newMarkers });
-      //Todo: limpiar polyline
+      if (state.map?.getLayer('RouteString')) {
+         state.map.removeLayer('RouteString');
+         state.map.removeSource('RouteString');
+      }
    }, [places])
 
    const setMap = (map: Map) => {
